@@ -5,10 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CabInvoiceGenaratorTest {
-    CabInvoiceGenarator cabInvoiceGenarator=null;
+    CabInvoiceGenarator cabInvoiceGenarator = null;
 
     @BeforeEach
-    public void setUp() throws Exception{
+    public void setUp() throws Exception {
         cabInvoiceGenarator = new CabInvoiceGenarator();
     }
 
@@ -29,11 +29,12 @@ public class CabInvoiceGenaratorTest {
     }
 
     @Test
-    void givenMultipleRides_whenCalucated_shouldReturnTotslFare() {
+    void givenMultipleRides_whenCalucated_shouldReturnInvoiceSummary() {
         Ride[] rides = {new Ride(5.0, 10),
-                        new Ride(0.1, 1)
-                            };
-        double fare = cabInvoiceGenarator.calculateFare(rides);
-        Assertions.assertEquals(fare, 65);
+                new Ride(0.1, 1)
+        };
+        InvoiceSummary summary = cabInvoiceGenarator.calculateFare(rides);
+        InvoiceSummary expectedValue = new InvoiceSummary(2, 65.0);
+        Assertions.assertEquals(summary, expectedValue);
     }
 }
