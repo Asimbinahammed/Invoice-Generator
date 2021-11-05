@@ -37,4 +37,16 @@ public class CabInvoiceGenaratorTest {
         InvoiceSummary expectedValue = new InvoiceSummary(2, 65.0);
         Assertions.assertEquals(summary, expectedValue);
     }
+
+    @Test
+    void givenMultipleRidesAndUserId_whenCalucated_shouldReturnInvoiceSummary() {
+        Ride[] rides = {new Ride(5.0, 10),
+                new Ride(0.1, 1)
+        };
+        String userId = "1";
+        cabInvoiceGenarator.addRide(userId,rides);
+        InvoiceSummary summary = cabInvoiceGenarator.getInvoiceSummary(userId);
+        InvoiceSummary expectedValue = new InvoiceSummary(2, 65.0);
+        Assertions.assertEquals(summary, expectedValue);
+    }
 }

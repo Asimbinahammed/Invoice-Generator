@@ -1,7 +1,8 @@
 package com.bridgelab;
 
-import java.util.Objects;
-
+/**
+ * Purpose : this class return no of rides, total fare and average cost
+ */
 public class InvoiceSummary {
     private final int numberOfRides;
     private final double totalFare;
