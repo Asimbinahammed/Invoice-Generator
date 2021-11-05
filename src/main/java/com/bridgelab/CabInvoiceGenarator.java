@@ -11,9 +11,9 @@ public class CabInvoiceGenarator {
     private static final int COST_PER_MINUTE = 1;
     private static final int COST_PER_KILOMETER = 10;
     private static final double MINIMUM_FARE = 5.0;
-    private final RideRepository rideRepository;
+    private RideRepository rideRepository;
 
-    public CabInvoiceGenarator(){
+    public CabInvoiceGenarator() {
         this.rideRepository = new RideRepository();
     }
 
@@ -31,18 +31,20 @@ public class CabInvoiceGenarator {
 
     /**
      * Purpose : to calculate fare
+     *
      * @param rides contins distance and time for each ride
      * @return summary which contains no of rides and total fare
      */
     public InvoiceSummary calculateFare(Ride[] rides) {
         double totalFare = 0;
-        for (Ride ride:rides)
-            totalFare += this.calculateFare(ride.distance, ride.time);
+        for (Ride ride : rides)
+            totalFare += ride.cabRide.calculateCostOfRide(ride);
         return new InvoiceSummary(rides.length, totalFare);
     }
 
     /**
      * Purpose : add ride into list
+     *
      * @param userId
      * @param rides
      */
@@ -50,12 +52,18 @@ public class CabInvoiceGenarator {
         rideRepository.addRides(userId, rides);
     }
 
+    public void setRideRepository(RideRepository rideRepository) {
+        this.rideRepository = rideRepository;
+    }
+
     /**
      * purpose : To find summary by user id
+     *
      * @param userId
      * @return summary of rides
      */
     public InvoiceSummary getInvoiceSummary(String userId) {
         return this.calculateFare(rideRepository.getRides(userId));
     }
+
 }
