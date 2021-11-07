@@ -6,27 +6,12 @@ package com.bridgelab;
  * @author ASIM AHAMMED
  * @since 04-11-2021
  */
-public class CabInvoiceGenarator {
+public class InvoiceService {
 
-    private static final int COST_PER_MINUTE = 1;
-    private static final int COST_PER_KILOMETER = 10;
-    private static final double MINIMUM_FARE = 5.0;
     private RideRepository rideRepository;
 
-    public CabInvoiceGenarator() {
+    public void setRideRepository(RideRepository rideRepository){
         this.rideRepository = new RideRepository();
-    }
-
-    /**
-     * Purpose : Calculate fare
-     *
-     * @param distance
-     * @param time
-     * @return total fare
-     */
-    public double calculateFare(double distance, int time) {
-        double fare = distance * COST_PER_KILOMETER + time * COST_PER_MINUTE;
-        return Math.max(fare, MINIMUM_FARE);
     }
 
     /**
@@ -50,10 +35,6 @@ public class CabInvoiceGenarator {
      */
     public void addRide(String userId, Ride[] rides) {
         rideRepository.addRides(userId, rides);
-    }
-
-    public void setRideRepository(RideRepository rideRepository) {
-        this.rideRepository = rideRepository;
     }
 
     /**
