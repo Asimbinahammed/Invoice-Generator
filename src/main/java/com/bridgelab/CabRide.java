@@ -13,6 +13,11 @@ public enum CabRide {
         this.minmumCost = minmumCost;
     }
 
+    /**
+     * Purpose : Calulate maximum cost o ride
+     * @param ride contains distance an time
+     * @return cost of ride
+     */
     public double calculateCostOfRide(Ride ride) {
         double rideCost = ride.distance*costPerKM + ride.time*costPerMin;
         return Math.max(rideCost, minmumCost);
